@@ -1,0 +1,26 @@
+#!/usr/local/bin/perl -w
+# -*- Perl -*- 
+
+# RCS info
+#  $Author$
+#  $Date$
+#  $Id$
+#  $Source$
+#
+
+use strict;
+use File::Path;
+my $S_dir="$ENV{HOME}/Work/Daily/".`date +%y/%m`;
+chomp($S_dir);
+unless(-d $S_dir) {
+  mkpath($S_dir);
+}
+my $S_filename="$S_dir/".`date +%d`.".txt";
+$S_filename =~ s/\n//s;
+unless(-f $S_filename) {
+  system("cp -i ~/Work/TEMPLATES/daily.template $S_filename");
+  wait();
+}
+
+system("emacs -nw $S_filename");
+

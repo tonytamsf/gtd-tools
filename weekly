@@ -1,0 +1,20 @@
+#!/usr/local/bin/perl -w
+# -*- Perl -*- 
+
+# RCS info
+#  $Author$
+#  $Date$
+#  $Id$
+#  $Source$
+#
+
+use strict;
+my $S_filename="$ENV{HOME}/Work/Week/".`date +%y_%U.weekly`;
+chomp($S_filename);
+unless(-f $S_filename) {
+  system("cp -i ~/Work/TEMPLATES/weekly.template $S_filename");
+  wait();
+}
+
+system("emacs -nw $S_filename");
+
